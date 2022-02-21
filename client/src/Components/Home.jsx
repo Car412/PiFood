@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useEffect, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { getRecipes, filterByDiets, orderByName, orderByScore} from "../Redux/actions";
+import { getRecipes, orderByName, orderByScore, filterByTypes} from "../Redux/actions";
 import {Link} from "react-router-dom";
 import Card from "../Components/Card";
 import Paginado from "./Paginado";
@@ -31,8 +31,8 @@ export default function Home(){
         dispatch(getRecipes());
     }
 
-    function handleFilterDiet(e){
-        dispatch(filterByDiets(e.target.value))
+    function handleFilterTypes(e){
+        dispatch(filterByTypes(e.target.value))
     }
 
     function handleSort(e){
@@ -59,7 +59,7 @@ export default function Home(){
                     <option value='asc'>A to Z</option>
                     <option value='desc'>Z to A</option>
                 </select>              
-                <select onChange={e=>handleFilterDiet(e)} > 
+                <select onChange={e=>handleFilterTypes(e)} > 
                     <option value='All'>All Diets</option>
                     <option value='gluten free'>Gluten Free</option>
                     <option value='dairy free'>Dairy Free</option>

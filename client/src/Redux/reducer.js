@@ -1,11 +1,12 @@
 import {
     GET_RECIPES,
-    FILTER_DIET,
+    FILTER_TYPES,
     ORDER_NAME,
     GET_NAME_RECIPE,
-    GET_DIETS,
+    GET_TYPES,
     POST_RECIPE,
     ORDER_SCORE,
+    GET_DETAILS,
 
 } from '../Redux/actions'
 
@@ -13,7 +14,7 @@ const initialState = {
     recipes : [],
     allRecipes: [],
     detail : [],
-    diets: []  
+    types: []  
 };
 
 function rootReducer (state = initialState, action) {
@@ -24,12 +25,12 @@ function rootReducer (state = initialState, action) {
             recipes: action.payload, 
             allRecipes: action.payload 
             }
-            case FILTER_DIET:
+            case FILTER_TYPES:
                 const allRecipes= state.allRecipes
-                const dietsFilt = action.payload === 'All'? allRecipes : allRecipes.filter(el=> el.diets === action.payload)
+                const typesFilt = action.payload === 'All'? allRecipes : allRecipes.filter(el=> el.diets === action.payload)
                 return{
                     ...state,
-                    recipes: dietsFilt
+                    recipes: typesFilt
                 }
             case ORDER_NAME:
                 let sortedArr = action.payload === 'asc'?
@@ -88,11 +89,16 @@ function rootReducer (state = initialState, action) {
                 return{
                     ...state
                 }
-            case GET_DIETS:
+            case GET_TYPES:
                 return{
                     ...state,
-                    diets: action.payload
+                    types: action.payload
                 } 
+            case GET_DETAILS:
+                return{
+                    ...state,
+                    detail:action.payload
+                }
 
             default:
                 return state;

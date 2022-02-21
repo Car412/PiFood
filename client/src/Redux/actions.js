@@ -1,12 +1,13 @@
 import axios from "axios";
 
 export const GET_RECIPES = 'GET_RECIPES';
-export const FILTER_DIET = 'FILTER_DIET';
+export const FILTER_TYPES = 'FILTER_TYPES';
 export const ORDER_NAME = 'ORDER_NAME';
 export const GET_NAME_RECIPE = 'GET_NAME_RECIPE';
-export const GET_DIETS = 'GET_DIETS';
+export const GET_TYPES = 'GET_TYPES';
 export const POST_RECIPE= 'POST_RECIPE';
 export const ORDER_SCORE = 'ORDER_SCORE';
+export const GET_DETAILS = 'GET_DETAILS';
 
 
 export function getRecipes() {
@@ -35,9 +36,9 @@ export function getNameRecipes(name){
   }
 }
 
-export function filterByDiets(payload){
+export function filterByTypes(payload){
   return{
-    type: 'FILTER_DIET',
+    type: 'FILTER_TYPES',
     payload
   }
 }
@@ -56,11 +57,11 @@ export function orderByScore(payload){
   }
 }
 
-export function getDiets(){
+export function getTypes(){
   return async function(dispatch){
     var json= await axios.get("http://localhost:3001/types");
     return dispatch({
-      type: 'GET_DIETS',
+      type: 'GET_TYPES',
       payload: json.data
     })
   }
@@ -70,5 +71,19 @@ export function postRecipe(payload){
   return async function(dispatch){
     var json= await axios.post("http://localhost:3001/recipe", payload);
     return json;
+  }
+}
+
+export function getDetail(id) {
+  return async function(dispatch){
+    try {
+      var json= await axios.get(`http://localhost:3001/recipes/${id}`);
+      return dispatch({
+        type: GET_DETAILS,
+        payload: json.data
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 }

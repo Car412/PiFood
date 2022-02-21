@@ -2,11 +2,24 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {postRecipe, getDiets} from '../Redux/actions'
+import {postRecipe, getTypes} from '../Redux/actions'
+
+function validate (input){
+    let error= {};
+    if(!input.name){
+        error.name = 'Name is required';
+    }else if(!input.summary){
+        error.summary = 'Summary is required';
+    }else if(input.score > 0 && input.score < 10){
+        error.score = 'The Score has to be lower or equal than 10'
+    }
+    return error;
+}
 
 export default function RecipeCreate(){
     const dispatch= useDispatch();    
     const diets = useSelector((state)=> state.diets)
+    const [error, setError] = useState({})
 
     const [input, setInput] = useState({
         name: '',
@@ -23,6 +36,10 @@ export default function RecipeCreate(){
             ...input,
             [e.target.name] : e.target.value
         })
+        setError(validate({
+            ...input,
+            [e.target.name] : e.target.value
+        }));
     }
 
     function handleSelect(e){
@@ -44,12 +61,12 @@ export default function RecipeCreate(){
         steps:'',
         image:'',
         diets:[],
-        })         
+        })        
 
     }
 
     useEffect(()=>{
-        dispatch(getDiets());
+        dispatch(getTypes());
     }, [dispatch]);
 
     return(
@@ -60,14 +77,17 @@ export default function RecipeCreate(){
                 <div>
                     <label>Name:</label>
                     <input type= 'text' value={input.name} name= 'name' onChange={(e)=>handleChange(e)}></input>
+                    {error.name && (<p>{error.name}</p>)}
                 </div>
                 <div>
                     <label>Summary:</label>
                     <input type= 'text' value={input.summary} name= 'summary'onChange={(e)=>handleChange(e)}></input>
+                    {error.summary && (<p>{error.summary}</p>)}
                 </div>
                 <div>
                     <label>Score:</label>
                     <input type= 'number' value={input.score} name= 'score' onChange={(e)=>handleChange(e)}></input>
+                    {error.score && (<p>{error.score}</p>)}
                 </div>
                 <div>
                     <label>Health score:</label>
@@ -85,8 +105,7 @@ export default function RecipeCreate(){
                     {diets.map((d)=>(
                         <option value={d.name}>{d.name}</option>
                     ))}
-                </select>
-                <ul><li>{input.diets.map(el=>el + " ,")}</li></ul> 
+                </select>               
 
                 <button type="submit">Create Recipe</button>
                 
