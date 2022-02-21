@@ -10,10 +10,10 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route exact path="/" element={<LandingPage/>} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/recipes/:id" element={<Detail/>} />
-          <Route path="/recipe" element={<RecipeCreate/>} />
+          <Route exact path="/" element={<LandingPage/>}/>
+          <Route path="/home" element={<Home/>}/>
+          <Route path="/recipes/:id" element={<Detail/>}/>
+          <Route path="/recipe" element={<RecipeCreate/>}/>
         </Routes>
       </div>
     </BrowserRouter>

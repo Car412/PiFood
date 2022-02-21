@@ -9,7 +9,7 @@ export default function Paginado({recipesPerPage, allRecipes, paginado}){
     return(
         <nav>
             <ul className="paginado">
-                {pageNumbers && pageNumbers.map(number=> (
+                {pageNumbers && pageNumbers.map(number=>(
                     <li className="number" key={number}>
                     <button onClick={()=>paginado(number)}>{number}</button>
                     </li>

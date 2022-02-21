@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
         "fodmap friendly",
         "whole 30",
     ]
-
     diets.forEach(el => {
         Diet.findOrCreate({ 
             where: { name: el }  //por cada tipo de dieta

@@ -43,6 +43,6 @@ module.exports = (sequelize) => {
       allowNull: false,  //es mas facil acceder a la receta que tenga en base de datos, porque todos los que cree en DB
       defaultValue: true//van a tener esta propiedad
     }
-  });
+  }, {timestamps:false});
 };
 

@@ -1,36 +1,33 @@
 const {Router} = require ('express');
 const axios = require ('axios');
-const API_KEY = process.env;
+const {YOUR_API_KEY} = process.env;
 const { Recipe, Diet} = require ('../db.js');
 const router = Router();
 
-
-// primero me creo una const donde me traigo desde la api la info, la mapeo y retorno solo lo que necesito
 const getApi = async () =>{
-    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`)
-    const apiInfo = await apiUrl.data.map(el =>{
+    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=100`)
+    const apiInfo = await apiUrl.data.results.map(el =>{
         return{
             ID: el.id,                         
             name: el.title,
             image: el.image,
             score: el.spoonacularScore,            
-            diets: el.diets.map((d) => { return { name: d } }),
+            diets: el.diets.map((d) => { return { name: d } }), // hago map porque devuelve un arreglo, son varios tipos de dieta
             summary: el.summary,
             healthScore: el.healthScore,
             steps: el.analyzedInstructions
         };
     });
-    return apiInfo; // traigo la info de la api
+    return apiInfo;
 };
 
-// otra donde me guarlo la info de la bd, incluidos los tipos de dieta.
 const getDB = async () =>{
 return await Recipe.findAll({
     include: {
         model: Diet,
-        attributes: ['name'],  //include el modeloDiet para que se genere la relacion 
+        attributes: ['name'],  
         through: {
-            attributes: [],   //mediente los atributos ->  me traeria todos en caso de que fueran más sin la comprobacion through
+            attributes: [],   
         },
     }
 })
@@ -45,15 +42,15 @@ return infoTotal;
 
 router.get('/', async (req, res)=>{
     const {name} = req.query
-    const recipesTotal = await getAllRecipes()
+    const recipesTotal = await getAllrecipes()
   
     if (name) {
-        let recipeName = recipesTotal.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))  //si incluye el nombre que viene por query
+        let recipeName = await recipesTotal.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))// se fija si incluye el nombre que viene por query
         recipeName.length ?
             res.status(200).send(recipeName) :
             res.status(404).send("La receta no existe")
     } else {
-        res.status(200).send(recipesTotal)
+        res.status(200).send(recipesTotal) // si no hay query, manda todo 
     }
 })
 
@@ -69,7 +66,7 @@ router.get('/:id', async (req, res)=>{
     }
 });
 
-router.post('/recipe', async (req, res)=>{
+router.post('/', async (req, res)=>{
     const { name, summary, score, healthScore, steps, diets, image, createdINBd } = req.body;
     const recipeCreated = await Recipe.create({
         name,
@@ -80,16 +77,10 @@ router.post('/recipe', async (req, res)=>{
         image,
         createdINBd 
     });
-
-    for (let i = 0; i < diets.length; i++) {   //el tipo de dieta debo encontrarlo en el modelo
-        const diet = await Diet.findOne({       //encontrar la dieta en el modelo Diet
-            where: { name: diets[i] }        //todas las que coincidan con el nombre que llega por body
-        })
-        recipeCreated.addDiet(diet)        //metodo de sql
-    }
+    const dietDb = await Diet.findAll({where: {name: diets}})       
+    
+    recipeCreated.addDiet(dietDb)
     res.send('Receta creada con éxito')
 })
-
-
 
 module.exports = router;

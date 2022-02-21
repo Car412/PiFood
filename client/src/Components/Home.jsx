@@ -1,18 +1,19 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useEffect, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { getRecipes, filterByDiet, filterByScore, filterByName } from "../Redux/actions";
+import { getRecipes, filterByDiets, orderByName, orderByScore} from "../Redux/actions";
 import {Link} from "react-router-dom";
 import Card from "../Components/Card";
 import Paginado from "./Paginado";
+import SearchBar from "./SearchBar";
 
 export default function Home(){
     const dispatch = useDispatch();
-    const allRecipes = useSelector((state)=> state.recipes) // traeme todo lo que está en el estado de recipes
-    const [currentPage, setCurrentPage] = useState(1) // lo seteo en 1 porque siempre arranco en la primer pagina
+    const allRecipes = useSelector((state)=> state.recipes)
+    const [currentPage, setCurrentPage] = useState(1)
     const [recipesPerPage, setRecipesPerPage]= useState(9)
-    const indexOfLastRecipe = currentPage * recipesPerPage // 9
-    const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage // 0
+    const indexOfLastRecipe = currentPage * recipesPerPage 
+    const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage
     const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
     const [orden, setOrden] = useState('')
     const [orden1, setOrden1] = useState('')
@@ -21,47 +22,44 @@ export default function Home(){
         setCurrentPage(pageNumber)//setea la pag en el numero que yo vaya apretando
     }
 
-
-    useEffect(()=>{ // traigo del estado las recetas cuando el componente se monta
+    useEffect(()=>{
         dispatch(getRecipes());
-    },[dispatch]) //2do parametro del useEffect, le paso el array con el dispatch que es de lo que depende este componentDidmount para que no se genere un loopInfinito
+    },[dispatch]) 
 
     function handleClick(e){
         e.preventDefault();
-        dispatch(getRecipes());// receteo la pag y que me traiga todo de nuevo
+        dispatch(getRecipes());
     }
 
-    function handleOrderByName(e) {
-        e.preventDefault()
-        dispatch(filterByName(e.target.value))  //despacho la action
-        setCurrentPage(1)
-        setOrden(`Ordenado ${e.target.value}`)  //para cuando setee la pagina modifique el estado local y se renderice
-      }
+    function handleFilterDiet(e){
+        dispatch(filterByDiets(e.target.value))
+    }
 
-    function handleDiets(e) {
-        e.preventDefault()
-        dispatch(filterByDiet(e.target.value));
-      }
+    function handleSort(e){
+        e.preventDefault();
+        dispatch(orderByName(e.target.value))
+        setCurrentPage(1); // empieza a ordenar desde la primera pág
+        setOrden(`ordenado ${e.target.value}`) // modifica el estado local y se renderiza
+    }
 
-      function handleOrderByScore(e) {
-        e.preventDefault()
-        dispatch(filterByScore(e.target.value))
-        setCurrentPage(1)
-        setOrden1(`Ordenado ${e.target.value}`)
-      }
+    function handleScore(e){
+        e.preventDefault();
+        dispatch(orderByScore(e.target.value))
+        setCurrentPage(1);
+        setOrden1(`ordenado ${e.target.value}`)
+    }
     
     return(
         <div>
             <Link to= '/recipe'>Create Recipe</Link>
-            <h1>FooD</h1>
-            <button onClick={e=> {handleClick(e)}}> 
-            </button>
+            <h1>Food</h1>
+            <button onClick={e=> {handleClick(e)}}>Reload</button>            
             <div>
-               <select onChange={e=>{handleOrderByName(e)}}>
-                    <option value='asc'>Ascendente</option> {/*necesito pasarle un value para poder mandar las cosas por payload*/}
-                    <option value='desc'>Descendente</option>
+               <select onChange={e=>handleSort(e)}>
+                    <option value='asc'>A to Z</option>
+                    <option value='desc'>Z to A</option>
                 </select>              
-                <select onChange={e=>{handleDiets(e)}}> 
+                <select onChange={e=>handleFilterDiet(e)} > 
                     <option value='All'>All Diets</option>
                     <option value='gluten free'>Gluten Free</option>
                     <option value='dairy free'>Dairy Free</option>
@@ -74,7 +72,7 @@ export default function Home(){
                     <option value='fodmap friendly'>Fodmap Friendly</option>
                     <option value='whole 30'>Whole 30</option>                    
                 </select> 
-                <select onChange={e=>{handleOrderByScore(e)}}>
+                <select onChange={e=> handleScore(e)}>
                     <option value='high'>High Score</option>
                     <option value='low'>Low Score</option>
                 </select>  
@@ -83,18 +81,21 @@ export default function Home(){
                 recipesPerPage={recipesPerPage}
                 allRecipes={allRecipes.length}
                 paginado={paginado}
-                />
-                              
-                <div>
-                {currentRecipes?.map((el)=>{
-                    return(                       
-                            <Link key ={el.id} to={`recipes/${el.ID}`}>
+                />   
+
+                <SearchBar/>                         
+                
+                {currentRecipes?.map((el)=>{ // tomar solo las recetas que me devuelve el paginado
+                    return( 
+                        <Fragment>                      
+                            <Link to={'/home/' + el.id}>
                                 <Card key={el.id} img={el.img} name={el.name} diet={el.diet}/>
-                            </Link>                        
+                            </Link>   
+                            </Fragment>                         
                     )
                 })                
                 }
-                </div>
+                
             </div>
         </div>
     )
