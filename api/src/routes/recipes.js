@@ -3,10 +3,10 @@ const {Router} = require ('express');
 const axios = require ('axios');
 const YOUR_API_KEY = process.apiKey;
 const { Recipe, Types} = require ('../db.js');
-const router = Router();
+const recipes = Router();
 
 const getApi = async () =>{
-    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?number=100&addRecipeInformation=true&apiKey=cc25dce4b24e477f8b864b8414d49f8d`)
+    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?number=100&addRecipeInformation=true&apiKey=a05c56b6fe3e455c967a1e7e9b62c0ef`)
     console.log(apiUrl)
     const apiInfo = await apiUrl.data.results.map(el =>{
         return{
@@ -14,10 +14,10 @@ const getApi = async () =>{
             name: el.title,
             image: el.image,
             score: el.spoonacularScore,            
-            diets: el.diets.map((d) => { return { name: d } }), // hago map porque devuelve un arreglo, son varios tipos de dieta
+            diets: el.diets,
             summary: el.summary,
             healthScore: el.healthScore,
-            steps: el.analyzedInstructions
+            steps: el.analyzedInstructions[0]?.steps
         };
     });
     return apiInfo;
@@ -42,12 +42,12 @@ const infoTotal = [...apInfo, ...dbInfo];
 return infoTotal;
 };
 
-router.get('/', async (req, res)=>{
+recipes.get('/', async (req, res)=>{
     const {name} = req.query
     const recipesTotal = await getAllrecipes()
   
     if (name) {
-        let recipeName = await recipesTotal.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))// se fija si incluye el nombre que viene por query
+        let recipeName = recipesTotal.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))// se fija si incluye el nombre que viene por query
         recipeName.length ?
             res.status(200).send(recipeName) :
             res.status(404).send("Recipe doesn't exist")
@@ -56,14 +56,16 @@ router.get('/', async (req, res)=>{
     }
 })
 
-router.get('/:id', async (req, res)=>{
+recipes.get('/:id', async (req, res)=>{
     const {id} = req.params;
     const recipesTotal = await getAllrecipes();
 
     if(id){
-        const recipeId = recipesTotal.filter(el=> el.id === id)
+        const recipeId = recipesTotal.filter(el=> el.ID?.toString() === id)
         recipeId.length?
         res.status(200).send(recipeId) :
         res.status(404).send('Recipe not found') 
     }
 });
+
+module.exports = recipes;

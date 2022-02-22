@@ -1,8 +1,8 @@
 const {Router} = require ('express');
 const {Recipe, Types} = require ('../db');
-const router = Router();
+const recipe = Router();
 
-router.post('/', async (req, res)=>{
+recipe.post('/', async (req, res)=>{
     const { name, summary, score, healthScore, steps, diets, image, createdINBd } = req.body;
     const recipeCreated = await Recipe.create({
         name,
@@ -19,4 +19,4 @@ router.post('/', async (req, res)=>{
     res.send('Recipe created successfully')
 })
 
-module.exports = router;
+module.exports = recipe;

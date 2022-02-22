@@ -10,7 +10,7 @@ function validate (input){
         error.name = 'Name is required';
     }else if(!input.summary){
         error.summary = 'Summary is required';
-    }else if(input.score > 0 && input.score < 10){
+    }else if(input.score > 10){
         error.score = 'The Score has to be lower or equal than 10'
     }
     return error;
@@ -102,7 +102,7 @@ export default function RecipeCreate(){
                     <input type= 'text' value={input.image} name= 'image' placeholder="url image" onChange={(e)=>handleChange(e)}></input>
                 </div>
                 <select onChange={(e)=> handleSelect(e)}>
-                    {diets.map((d)=>(
+                    {diets?.map((d)=>(
                         <option value={d.name}>{d.name}</option>
                     ))}
                 </select>               

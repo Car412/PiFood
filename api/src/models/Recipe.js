@@ -9,13 +9,13 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     id:{
-      type: DataTypes.UUID,// me genera un id alfanumérico random
+      type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true
     },
     image: {
-      type: DataTypes.STRING,    //porque endpoint de la api me envia por string
+      type: DataTypes.STRING,    
       allowNull: true
     },
     summary: {

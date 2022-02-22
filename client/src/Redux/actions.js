@@ -59,7 +59,7 @@ export function orderByScore(payload){
 
 export function getTypes(){
   return async function(dispatch){
-    var json= await axios.get("http://localhost:3001/types");
+    var json= await axios.get("http://localhost:3001/types");    
     return dispatch({
       type: 'GET_TYPES',
       payload: json.data
@@ -80,7 +80,7 @@ export function getDetail(id) {
       var json= await axios.get(`http://localhost:3001/recipes/${id}`);
       return dispatch({
         type: GET_DETAILS,
-        payload: json.data
+        payload: json.data[0]
       })
     } catch (error) {
       console.log(error)

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useEffect, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { getRecipes, orderByName, orderByScore, filterByTypes} from "../Redux/actions";
+import { getRecipes, orderByName, orderByScore, filterByTypes, getTypes} from "../Redux/actions";
 import {Link} from "react-router-dom";
 import Card from "../Components/Card";
 import Paginado from "./Paginado";
@@ -24,7 +24,11 @@ export default function Home(){
 
     useEffect(()=>{
         dispatch(getRecipes());
+        dispatch(getTypes());
     },[dispatch]) 
+
+    const types = useSelector(state=> state.types)
+
 
     function handleClick(e){
         e.preventDefault();
@@ -55,48 +59,41 @@ export default function Home(){
             <h1>Food</h1>
             <button onClick={e=> {handleClick(e)}}>Reload</button>            
             <div>
+            <SearchBar/>
                <select onChange={e=>handleSort(e)}>
                     <option value='asc'>A to Z</option>
                     <option value='desc'>Z to A</option>
                 </select>              
                 <select onChange={e=>handleFilterTypes(e)} > 
                     <option value='All'>All Diets</option>
-                    <option value='gluten free'>Gluten Free</option>
-                    <option value='dairy free'>Dairy Free</option>
-                    <option value='paleolithic'>Paleolithic</option>
-                    <option value='ketogenic'>Ketogenic</option>
-                    <option value='lacto ovo vegetarian'>Lacto Ovo Vegetarian</option>
-                    <option value='vegan'>Vegan</option>
-                    <option value='pescatarian'>Pescatarian</option>
-                    <option value='primal'>Primal</option>
-                    <option value='fodmap friendly'>Fodmap Friendly</option>
-                    <option value='whole 30'>Whole 30</option>                    
+                    {types?.map(diet=> <option value={diet.name} key={diet.name}>{diet.name}</option> )}                                    
                 </select> 
                 <select onChange={e=> handleScore(e)}>
                     <option value='high'>High Score</option>
                     <option value='low'>Low Score</option>
-                </select>  
-                <Paginado
-                key= {1}
-                recipesPerPage={recipesPerPage}
-                allRecipes={allRecipes.length}
-                paginado={paginado}
-                />   
-
-                <SearchBar/>                         
-                
+                </select>                                
+                <div>                         
                 {currentRecipes?.map((el)=>{ // tomar solo las recetas que me devuelve el paginado
                     return( 
                         <Fragment>                      
-                            <Link to={'/home/' + el.id}>
-                                <Card key={el.id} img={el.img} name={el.name} diet={el.diet}/>
+                            <Link to={'/recipes/' + el.ID} key={'l' + el.ID}>
+                                <Card key={el.ID} img={el.image} name={el.name} diet={el.diet}/>
                             </Link>   
                             </Fragment>                         
                     )
                 })                
                 }
+                </div>
+                <div>
+                <Paginado key= {1} recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginado={paginado}/>
+                </div>
                 
             </div>
         </div>
     )
 }
+                
+                
+                
+                 
+
