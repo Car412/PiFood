@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import Card from "../Components/Card";
 import Paginado from "./Paginado";
 import SearchBar from "./SearchBar";
+import estilos from './Home.module.css';
 
 export default function Home(){
     const dispatch = useDispatch();
@@ -54,25 +55,26 @@ export default function Home(){
     }
     
     return(
-        <div>
-            <Link to= '/recipe'>Create Recipe</Link>
-            <h1>Food</h1>
-            <button onClick={e=> {handleClick(e)}}>Reload</button>            
-            <div>
-            <SearchBar/>
-               <select onChange={e=>handleSort(e)}>
-                    <option value='asc'>A to Z</option>
-                    <option value='desc'>Z to A</option>
-                </select>              
-                <select onChange={e=>handleFilterTypes(e)} > 
-                    <option value='All'>All Diets</option>
-                    {types?.map(diet=> <option value={diet.name} key={diet.name}>{diet.name}</option> )}                                    
-                </select> 
-                <select onChange={e=> handleScore(e)}>
-                    <option value='high'>High Score</option>
-                    <option value='low'>Low Score</option>
-                </select>                                
-                <div>                         
+        <div className={estilos.contenedor}>
+            <Link to= '/recipe' className={estilos.recipeCreate}><button className={estilos.boton1}>Create Recipe</button></Link>
+            <h1 className={estilos.h1}>Recipes</h1>                       
+            <div>            
+            <select onChange={e=>handleSort(e)} className={estilos.select}>
+                <option value='asc'>A to Z</option>
+                <option value='desc'>Z to A</option>
+            </select>              
+            <select onChange={e=>handleFilterTypes(e)} className={estilos.select}> 
+                <option value='All'>All Diets</option>
+                {types?.map(diet=> <option value={diet.name} key={diet.name}>{diet.name}</option> )}                                    
+            </select> 
+            <select onChange={e=> handleScore(e)} className={estilos.select}>
+                <option value='high'>High Score</option>
+                <option value='low'>Low Score</option>                 
+            </select>
+            
+            <SearchBar className={estilos.boton1}/>
+            
+            <div className={estilos.card}>                         
                 {currentRecipes?.map((el)=>{ // tomar solo las recetas que me devuelve el paginado
                     return( 
                         <Fragment>                      
@@ -80,18 +82,21 @@ export default function Home(){
                                 <Card key={el.ID} img={el.image} name={el.name} diet={el.diet}/>
                             </Link>   
                             </Fragment>                         
-                    )
-                })                
+                    )})                               
                 }
-                </div>
-                <div>
-                <Paginado key= {1} recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginado={paginado}/>
-                </div>
+            </div>
+            <div>
+            <Paginado key= {1} recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginado={paginado}/>
+            </div>
                 
             </div>
         </div>
     )
-}
+}          
+                              
+                              
+                                              
+
                 
                 
                 

@@ -1,0 +1,37 @@
+.nav{
+    display: flex;
+    justify-content: center;
+}
+
+.ul{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 10px;
+    align-items: center;
+    justify-content:space-between;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border: 1px;
+    border-radius: 3px;    
+}
+
+.li{
+    display: inline;    
+}
+
+.boton{
+    border: 1,5px solid rgba(27, 23, 23, 0.815);
+    font-size: 15px;
+    height: 35px;
+    width: 35px;
+    border-radius: 3px;
+    color: rgb(60, 71, 235);
+    background-color: white;
+    justify-content:center;
+}
+
+.boton:hover{
+    background-color: rgb(60, 71, 235);
+    color: white;
+}

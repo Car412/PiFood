@@ -1,0 +1,30 @@
+.contenedor{
+    align-items: center;
+    margin-top: 50px;  
+}
+
+.input{
+    font-size: medium;
+    border-radius: 5px;
+    border: 2px;
+    background-color: transparent;
+    color:blueviolet
+}
+
+.boton1{
+    margin: 5px 5px;
+    padding: 5px 5px;
+    font-size: large;
+    color: #5f5e99;
+    border: 1px solid #5f5e99;
+    border-radius: 5px;   
+    
+}
+.boton:hover{
+    color:black;
+    background-color:#5f5e99;    
+}
+
+.div{
+    align-items: center;
+}

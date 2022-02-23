@@ -1,0 +1,47 @@
+.contenedor{
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vh;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center; 
+    background-image: url('https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://cocinaconmarco.com/wp-content/uploads/2015/05/v-e1529879505785.jpg');
+    
+}
+
+.h1{
+    font-size:xx-large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(27, 25, 25, 0.801);
+    align-self: auto;
+}
+
+.label{
+    font-size: medium;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    align-content: center;
+}
+
+.boton1{
+    margin: 5px 5px;
+    padding: 5px 5px;
+    font-size: large;
+    color: #09090aa4;
+    border: rgb(241, 162, 133);
+    border-radius: 5px;
+}
+
+
+.boton:hover{
+    color:black;
+    background-color:#5f5e99;    
+}
+
+.input{
+    border-radius: 7px;
+    border: rgb(241, 162, 133);
+    background-color: lavenderblush;
+}

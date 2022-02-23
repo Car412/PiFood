@@ -1,12 +1,13 @@
 import React from "react";
 import {Link} from 'react-router-dom'
+import estilos from './LandingPage.module.css' 
 
 export default function LandingPage(){
     return(
-        <div>
-            <h1>Welcome!</h1>
+        <div className={estilos.contenedor}>
+            <h1 className={estilos.titulo}>Universe of Recipes</h1>
             <Link to = '/home'>
-                <button>Home</button>
+                <button className={estilos.boton}>Home</button>
             </Link>
         </div>
     )

@@ -1,0 +1,65 @@
+.contenedor{
+    display: flex;
+    background-size:cover;
+    background-position: center center and center;    
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
+    background-image: url('https://media.istockphoto.com/photos/wood-table-top-on-light-blur-background-empty-brown-wood-table-picture-id1146986931?k=20&m=1146986931&s=612x612&w=0&h=550cgBtch9e_eXJcpBivhqHlag_qm4at0xZE4GMS6m0=');          
+}
+
+.h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-shadow: 1px 1px 2px black, 0 0 1em rgba(39, 39, 53, 0.808), 0 0 0.2em rgb(99, 99, 121);
+    color: white;
+    font-size: 55px;
+    margin-top: 2px;    
+}    
+
+.select{
+    margin: 5px 5px;
+    padding: 5px 5px;
+    font-size: large;
+    color: #5f5e99;
+    border: 1px solid #5f5e99;
+    border-radius: 5px;
+}
+
+.recipeCreate{
+    border: 2px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: #5f5e99;
+    cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+    font-weight: 300;
+    text-align: center;
+    text-decoration: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.boton1{
+    margin: 5px 5px;
+    padding: 5px 5px;
+    font-size: large;
+    color: #5f5e99;
+    border: 1px solid #5f5e99;
+    border-radius: 5px;
+    align-items: center;
+}
+
+
+.boton:hover{
+    color:black;
+    background-color:#5f5e99;    
+}
+
+.card{
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

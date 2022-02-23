@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {postRecipe, getTypes} from '../Redux/actions'
+import estilos from './RecipeCreate.module.css';
 
 function validate (input){
     let error= {};
@@ -70,45 +71,44 @@ export default function RecipeCreate(){
     }, [dispatch]);
 
     return(
-        <div>
-            <Link to='/home'><button>Back</button></Link>
-            <h1>Create your Recipe!</h1>
+        <div className={estilos.contenedor}>
+            
+            <h1 className={estilos.h1}>Create your Recipe!</h1>
             <form onSubmit={(e)=> handleSubmit(e)}>
                 <div>
-                    <label>Name:</label>
-                    <input type= 'text' value={input.name} name= 'name' onChange={(e)=>handleChange(e)}></input>
+                    <label>Name: </label>
+                    <input className={estilos.input}type= 'text' value={input.name} name= 'name' onChange={(e)=>handleChange(e)}></input>
                     {error.name && (<p>{error.name}</p>)}
                 </div>
                 <div>
-                    <label>Summary:</label>
-                    <input type= 'text' value={input.summary} name= 'summary'onChange={(e)=>handleChange(e)}></input>
+                    <label>Summary: </label>
+                    <input className={estilos.input} type= 'text' value={input.summary} name= 'summary'onChange={(e)=>handleChange(e)}></input>
                     {error.summary && (<p>{error.summary}</p>)}
                 </div>
                 <div>
-                    <label>Score:</label>
-                    <input type= 'number' value={input.score} name= 'score' onChange={(e)=>handleChange(e)}></input>
+                    <label>Score: </label>
+                    <input className={estilos.input} type= 'number' value={input.score} name= 'score' onChange={(e)=>handleChange(e)}></input>
                     {error.score && (<p>{error.score}</p>)}
                 </div>
                 <div>
-                    <label>Health score:</label>
-                    <input type= 'number' value={input.healthScore} name= 'healthScore'onChange={(e)=>handleChange(e)}></input>
+                    <label>Health score: </label>
+                    <input className={estilos.input} type= 'number' value={input.healthScore} name= 'healthScore'onChange={(e)=>handleChange(e)}></input>
                 </div>
                 <div>
-                    <label>Steps:</label>
-                    <input type= 'textarea' value={input.steps} name= 'steps'onChange={(e)=>handleChange(e)}></input>
+                    <label>Steps: </label>
+                    <input className={estilos.input} type= 'textarea' value={input.steps} name= 'steps'onChange={(e)=>handleChange(e)}></input>
                 </div>
                 <div>
-                    <label>Image:</label>
-                    <input type= 'text' value={input.image} name= 'image' placeholder="url image" onChange={(e)=>handleChange(e)}></input>
-                </div>
+                <label>Select Diets: </label>                   
                 <select onChange={(e)=> handleSelect(e)}>
-                    {diets?.map((d)=>(
-                        <option value={d.name}>{d.name}</option>
-                    ))}
-                </select>               
+                    
+                    {diets?.map((d)=>(<option value={d.name}>{d.name}</option>))}                       
+                    
+                </select> 
+                </div>              
 
-                <button type="submit">Create Recipe</button>
-                
+                <button type="submit" className={estilos.boton1}>Create Recipe</button>
+                <Link to='/home'><button className={estilos.boton1}>Back</button></Link> 
 
             </form>
         </div>
