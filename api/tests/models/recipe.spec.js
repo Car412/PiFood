@@ -17,6 +17,10 @@ describe('Recipe model', () => {
       it('should work when its a valid name', () => {
         Recipe.create({ name: 'Milanesa a la napolitana' });
       });
+      it('la propiedad steps debe ser del tipo text', async()=>{
+        const recipe = await Recipe.findOne({where: {title:'hola'}})
+        expect(recipe.dataValues.steps).to.be.a('text');
+      })
     });
   });
 });
