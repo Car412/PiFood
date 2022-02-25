@@ -1,50 +1,64 @@
 .contenedor{
-    height: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(231, 195, 248);
+  background-image: url('https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://cocinaconmarco.com/wp-content/uploads/2015/05/v-e1529879505785.jpg');
+  background-position-x: center;
+  background-position-y: center; 
+  background-color: transparent;
+  
+}
+.h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    font: italic;
+    text-shadow: 1px 1px 2px rgb(243, 226, 226), 0 0 1em rgba(39, 39, 53, 0.808), 0 0 0.2em rgb(99, 99, 121);
 }
 
-.h1{
-    color: blue;
+.img{
+    border-radius: 15px;
+    opacity: 80%;
+    max-width:300px;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;    
+    margin-left: 40%;
+}
+.h2{
+    font-size: 20px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 30px;
-    font-weight: 250px;
-    margin: 10px;
-    padding: 10px;
-    text-align: center;
+    text-decoration: underline;
+    text-shadow: 1px 1px 2px rgb(243, 226, 226), 0 0 1em rgba(71, 71, 107, 0.808), 0 0 0.2em rgb(99, 99, 121);
+    margin-bottom: 3px;
+    color: rgba(15, 15, 17, 0.644);
 }
 
 .h5{
-    color: cornflowerblue;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 15px;
-    font-weight: 150px;
-    margin: 10px;
-    padding: 10px;
-}
-
-.h2{
-    display: list-item;
-    text-align: left;
-    font-size: 12px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-
+    color: rgba(15, 15, 17, 0.644);
 }
 
-.steps{
-    display: contents;
-    color: blueviolet;
+.p{
     font-size: 10px;
+    margin-bottom: 3px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif 
+}
+
+.boton{
+    border: 1,5 solid rgba(27, 23, 23, 0.815);
+    color: rgb(60, 71, 235);
+    background-color: white;
+    border-radius: 15px;
+    cursor: pointer;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    padding: 15px;
+    font-size: medium;
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 21px;
 }
 
-.imagen{
-    border-radius: 5px;
-    width: 300px;
-    height: 200px;
-}
-
-.divImg{
-    float: left;
-    margin: 10px;
-    padding: 15px;
+.boton:hover{
+    color:white;
+    background-color:rgb(60, 71, 235);
 }

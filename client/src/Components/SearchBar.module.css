@@ -1,14 +1,12 @@
 .contenedor{
-    align-items: center;
-    margin-top: 50px;  
+    align-items:center;    
 }
 
 .input{
     font-size: medium;
     border-radius: 5px;
-    border: 2px;
-    background-color: transparent;
-    color:blueviolet
+    border: 0,5px solid rgba(46, 40, 40, 0.945);    
+    color:blueviolet;
 }
 
 .boton1{
@@ -18,7 +16,7 @@
     color: #5f5e99;
     border: 1px solid #5f5e99;
     border-radius: 5px;   
-    
+        
 }
 .boton:hover{
     color:black;

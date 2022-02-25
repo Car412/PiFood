@@ -23,6 +23,7 @@ export default function SearchBar(){
         <div className={estilos.contenedor}>
             <input
                 value = {name}
+                placeholder= 'Recipe...'
                 type='text'                
                 onChange={(e) => handleInputChange(e)}
                 className={estilos.input}

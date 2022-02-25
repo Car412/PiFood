@@ -1,5 +1,6 @@
 .contenedor{
     display: flex;
+    align-items: center;    
     min-height: 100vh;
     min-width: 100vh;
     background-size: cover;
@@ -13,35 +14,92 @@
 }
 
 .h1{
-    font-size:xx-large;
+    font-size:50px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-shadow: 1px 1px 2px rgb(82, 77, 77), 0 0 1em rgb(238, 128, 174);
     color: rgba(27, 25, 25, 0.801);
     align-self: auto;
 }
 
-.label{
-    font-size: medium;
+.p{
+    font-size: 15px;    
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    align-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.textarea{    
+    border: solid 1px;
+    border-radius: 10px;
+    text-indent: 5px;
+    font-weight: 200;
+    text-align: left;
+    margin-bottom: 3px;
+}
+
+.types{
+    border: solid 1px;
+    border-radius: 10px;
+    text-indent: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+    text-align: left;
+    margin-bottom: 3px;
+}
+
+.types2{
+    flex: auto;
+    flex-direction: row;
+    text-align: center;    
+}
+
+.form{
+    background-color: transparent;
+    padding: 9px;
+    margin: auto;
+    border-radius: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;    
 }
 
 .boton1{
-    margin: 5px 5px;
-    padding: 5px 5px;
-    font-size: large;
-    color: #09090aa4;
-    border: rgb(241, 162, 133);
+    color:plum;
+    background-color: gray;  
+    border-radius: 5px;  
+    margin-bottom: 31px;
+}
+.boton1:hover{
+    color:solid rgb(24, 23, 23); 
+    background-color: plum;
+}
+
+.boton2{
+    margin-bottom: 21px;
+    border-radius:5px;
+    color:plum;
+    background-color: gray;
+}
+.boton2:hover{
+    color:solid rgb(24, 23, 23); 
+    background-color: plum;
+}
+.botonX{
+    background-color: transparent;
+    border: 1px;
     border-radius: 5px;
+    color:rgb(231, 78, 78);
+}
+
+.error{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: red;
+}
+.li{
+    text-decoration: none;   
+    flex: auto;
+    flex-direction: row;
+    text-align: center;     
 }
 
 
-.boton:hover{
-    color:black;
-    background-color:#5f5e99;    
-}
 
-.input{
-    border-radius: 7px;
-    border: rgb(241, 162, 133);
-    background-color: lavenderblush;
-}
+

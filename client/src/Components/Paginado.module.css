@@ -29,6 +29,7 @@
     color: rgb(60, 71, 235);
     background-color: white;
     justify-content:center;
+    cursor: pointer;
 }
 
 .boton:hover{

@@ -11,15 +11,21 @@ function validate (input){
         error.name = 'Name is required';
     }else if(!input.summary){
         error.summary = 'Summary is required';
-    }else if(input.score > 10){
+    }else if(input.score < 0 || input.score > 10){
         error.score = 'The Score has to be lower or equal than 10'
     }
     return error;
 }
 
 export default function RecipeCreate(){
-    const dispatch= useDispatch();    
-    const diets = useSelector((state)=> state.diets)
+    const dispatch= useDispatch();          
+    
+    useEffect(()=>{
+        dispatch(getTypes());
+    }, []);
+
+    const diets = useSelector((state)=> state.types)
+
     const [error, setError] = useState({})
 
     const [input, setInput] = useState({
@@ -48,70 +54,98 @@ export default function RecipeCreate(){
             ...input,
             diets:[...input.diets, e.target.value]
         })
-    }
+    }   
 
     function handleSubmit(e){
         e.preventDefault();
         dispatch(postRecipe(input))
         alert('Recipe ok!')
         setInput({
-            name: '',
+        name: '',
         summary:'',
         score:0,
         healthScore:0,
         steps:'',
         image:'',
         diets:[],
-        })        
-
+        })
     }
 
-    useEffect(()=>{
-        dispatch(getTypes());
-    }, [dispatch]);
+    function handleDelete(e){
+        setInput({
+            ...input,
+            diets: input.diets.filter(d=> d !== e)
+        }) 
+     }
 
     return(
-        <div className={estilos.contenedor}>
-            
-            <h1 className={estilos.h1}>Create your Recipe!</h1>
-            <form onSubmit={(e)=> handleSubmit(e)}>
+        <div className={estilos.contenedor}>            
+            <form onSubmit={(e)=> handleSubmit(e)} className={estilos.form}>
                 <div>
-                    <label>Name: </label>
-                    <input className={estilos.input}type= 'text' value={input.name} name= 'name' onChange={(e)=>handleChange(e)}></input>
-                    {error.name && (<p>{error.name}</p>)}
+                    <h1 className={estilos.h1}>Be Creative</h1>
+                    <p className={estilos.p}>Name: </p>
+                    <input
+                    type='text'
+                    value={input.name}
+                    name='name'
+                    onChange={(e)=>handleChange(e)}
+                    />                    
+                    {error.name && <p className={estilos.error}>{error.name}</p>}
                 </div>
                 <div>
-                    <label>Summary: </label>
-                    <input className={estilos.input} type= 'text' value={input.summary} name= 'summary'onChange={(e)=>handleChange(e)}></input>
-                    {error.summary && (<p>{error.summary}</p>)}
+                    <p className={estilos.p}>Summary: </p>
+                    <textarea
+                    type='text'
+                    value={input.summary}
+                    name= 'summary'
+                    onChange={(e)=>handleChange(e)}
+                    />
+                    {error.summary && <p className={estilos.error}>{error.summary}</p>}
                 </div>
                 <div>
-                    <label>Score: </label>
-                    <input className={estilos.input} type= 'number' value={input.score} name= 'score' onChange={(e)=>handleChange(e)}></input>
-                    {error.score && (<p>{error.score}</p>)}
+                    <p className={estilos.p}>Score: </p>
+                    <input
+                    type= 'number'
+                    value={input.score}
+                    name='score'
+                    onChange={(e)=> handleChange(e)}/>
+                    {error.score && <p className={estilos.error}>{error.score}</p>}
                 </div>
                 <div>
-                    <label>Health score: </label>
-                    <input className={estilos.input} type= 'number' value={input.healthScore} name= 'healthScore'onChange={(e)=>handleChange(e)}></input>
+                    <p className={estilos.p}>Health Score: </p>
+                    <input
+                    type= 'number'
+                    value={input.healthScore}
+                    name='healthScore'
+                    onChange={(e)=> handleChange(e)}/>
                 </div>
                 <div>
-                    <label>Steps: </label>
-                    <input className={estilos.input} type= 'textarea' value={input.steps} name= 'steps'onChange={(e)=>handleChange(e)}></input>
+                    <p className={estilos.p}>Steps: </p>
+                    <textarea className={estilos.textarea}
+                    type='textarea'
+                    value={input.steps}
+                    name='steps'
+                    onChange={(e)=> handleChange(e)}/>                    
                 </div>
-                <div>
-                <label>Select Diets: </label>                   
-                <select onChange={(e)=> handleSelect(e)}>
-                    
-                    {diets?.map((d)=>(<option value={d.name}>{d.name}</option>))}                       
-                    
-                </select> 
-                </div>              
-
-                <button type="submit" className={estilos.boton1}>Create Recipe</button>
-                <Link to='/home'><button className={estilos.boton1}>Back</button></Link> 
-
+                <p className={estilos.p}>Type-Diets: </p>
+                <select onChange={(e)=> handleSelect(e)} className={estilos.p}>
+                    {diets.map((d, index)=>(<option
+                    key={index}
+                    value={d.name}>{d.name}</option>))}
+                </select>
+                <ul><li>{input.diets.map(el=> el + ', ')}</li></ul>
+                {input.diets.map(el=>
+                    <div className={estilos.li}>
+                        <p>{el}</p>
+                        <button className={estilos.botonX}onClick={(e)=> handleDelete(e)}>X</button>
+                    </div>)}
+                <button className={estilos.boton2}>Create</button>                
             </form>
+            <Link to='/home'><button className={estilos.boton1}>Back</button></Link>
         </div>
     )
-}
+}    
+
+    
+
 
