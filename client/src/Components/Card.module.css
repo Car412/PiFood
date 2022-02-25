@@ -3,7 +3,7 @@
     margin-left: 20px;
     margin-top: 25px;
     height: 350px;
-    width: 310px;
+    width: 350px;
     backdrop-filter: blur(6px);
     border: 10px solid #1c1d1c;
     border-radius: 18px;
@@ -18,10 +18,10 @@
 
 .tiulo{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 50px;
-    font-weight: 250px;
-    line-height: 50px;
+    font-size: 35px;
+    text-decoration: none;    
     margin: 5px;
+    color: #000000;
 }
 
 .img{
@@ -33,6 +33,10 @@
     border-radius: 15px;
 }
 
-.ul{
+.h4{
     line-height: 1%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
+    text-decoration: none;   
+    color:#1c1d1c; 
 }

@@ -54,12 +54,17 @@ export default function RecipeCreate(){
             ...input,
             diets:[...input.diets, e.target.value]
         })
-    }   
+    } 
+    function handleDelete(e){
+        setInput({
+            ...input,
+            diets: input.diets.filter(d=> d !== e)
+        }) 
+     }  
 
     function handleSubmit(e){
         e.preventDefault();
-        dispatch(postRecipe(input))
-        alert('Recipe ok!')
+        dispatch(postRecipe(input))        
         setInput({
         name: '',
         summary:'',
@@ -69,17 +74,11 @@ export default function RecipeCreate(){
         image:'',
         diets:[],
         })
-    }
-
-    function handleDelete(e){
-        setInput({
-            ...input,
-            diets: input.diets.filter(d=> d !== e)
-        }) 
-     }
+    }   
 
     return(
-        <div className={estilos.contenedor}>            
+        <div className={estilos.contenedor}>
+            <Link to='/home'><button className={estilos.boton1}>Back</button></Link>            
             <form onSubmit={(e)=> handleSubmit(e)} className={estilos.form}>
                 <div>
                     <h1 className={estilos.h1}>Be Creative</h1>
@@ -132,16 +131,15 @@ export default function RecipeCreate(){
                     {diets.map((d, index)=>(<option
                     key={index}
                     value={d.name}>{d.name}</option>))}
-                </select>
-                <ul><li>{input.diets.map(el=> el + ', ')}</li></ul>
+                </select>                               
                 {input.diets.map(el=>
-                    <div className={estilos.li}>
-                        <p>{el}</p>
-                        <button className={estilos.botonX}onClick={(e)=> handleDelete(e)}>X</button>
-                    </div>)}
+                    <div>
+                        <p>{el}</p>                        
+                        <button className={estilos.botonx} onClick={(e)=> handleDelete(e)}>x</button>
+                    </div>)}                   
+                    
                 <button className={estilos.boton2}>Create</button>                
-            </form>
-            <Link to='/home'><button className={estilos.boton1}>Back</button></Link>
+            </form>            
         </div>
     )
 }    

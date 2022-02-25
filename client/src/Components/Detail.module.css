@@ -10,7 +10,7 @@
 }
 .h1{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 30px;
+    font-size: 25px;
     font: italic;
     text-shadow: 1px 1px 2px rgb(243, 226, 226), 0 0 1em rgba(39, 39, 53, 0.808), 0 0 0.2em rgb(99, 99, 121);
 }
@@ -25,7 +25,7 @@
     margin-left: 40%;
 }
 .h2{
-    font-size: 20px;
+    font-size: 15px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     text-decoration: underline;
     text-shadow: 1px 1px 2px rgb(243, 226, 226), 0 0 1em rgba(71, 71, 107, 0.808), 0 0 0.2em rgb(99, 99, 121);
@@ -34,7 +34,7 @@
 }
 
 .h5{
-    font-size: 15px;
+    font-size: 12px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: rgba(15, 15, 17, 0.644);
 }

@@ -36,6 +36,10 @@ export default function Detail(){
             <div>
              <h2 className={estilos.h2}>Health Score:</h2>
              <h5 className={estilos.h5}>{myRecipe.healthScore && myRecipe.healthScore}</h5>
+            </div>
+            <div>
+              <h2 className={estilos.h2}>Dish Type: </h2>
+              <h5 className={estilos.h5}>{myRecipe.dishTypes ? myRecipe.dishTypes.map(d => d.name) : 'Dish type not found'}</h5>
             </div>            
             <div>
              <h2 className={estilos.h2}>Summary:</h2>

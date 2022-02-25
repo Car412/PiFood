@@ -24,13 +24,11 @@
 .p{
     font-size: 15px;    
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    align-items: center;
-    border-radius: 10px;
+    align-items: center;    
 }
 
 .textarea{    
-    border: solid 1px;
-    border-radius: 10px;
+    border: solid 1px;    
     text-indent: 5px;
     font-weight: 200;
     text-align: left;
@@ -58,31 +56,27 @@
     padding: 9px;
     margin: auto;
     border-radius: 5px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;  
 }
 
 .boton1{
     color:plum;
     background-color: gray;  
     border-radius: 5px;  
-    margin-bottom: 31px;
+    margin-top: 27px;
+    cursor: pointer;
+    font-size: medium;
 }
-.boton1:hover{
-    color:solid rgb(24, 23, 23); 
-    background-color: plum;
-}
-
 .boton2{
     margin-bottom: 21px;
     border-radius:5px;
     color:plum;
     background-color: gray;
+    cursor: pointer;
+    font-size: medium;
 }
-.boton2:hover{
-    color:solid rgb(24, 23, 23); 
-    background-color: plum;
-}
-.botonX{
+
+.botonx{
     background-color: transparent;
     border: 1px;
     border-radius: 5px;
@@ -93,12 +87,7 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: red;
 }
-.li{
-    text-decoration: none;   
-    flex: auto;
-    flex-direction: row;
-    text-align: center;     
-}
+
 
 
 
