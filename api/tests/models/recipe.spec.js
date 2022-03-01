@@ -18,7 +18,7 @@ describe('Recipe model', () => {
         Recipe.create({ name: 'Milanesa a la napolitana' });
       });
       it('la propiedad steps debe ser del tipo text', async()=>{
-        const recipe = await Recipe.findOne({where: {title:'hola'}})
+        const recipe = await Recipe.findOne({where: {name:'hola'}})
         expect(recipe.dataValues.steps).to.be.a('text');
       })
     });

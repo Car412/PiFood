@@ -30,12 +30,6 @@ export default function Home(){
 
     const types = useSelector(state=> state.types)
 
-
-    function handleClick(e){
-        e.preventDefault();
-        dispatch(getRecipes());
-    }
-
     function handleFilterTypes(e){
         dispatch(filterByTypes(e.target.value))
     }
@@ -79,7 +73,7 @@ export default function Home(){
                     return( 
                         <Fragment>                      
                             <Link to={'/recipes/' + el.ID} key={'l' + el.ID}>
-                                <Card key={el.ID} img={el.image} name={el.name} diet={el.diet}/>
+                                <Card key={el.ID} id={el.ID} img={el.image} name={el.name} diet={el.diets}/>
                             </Link>   
                             </Fragment>                         
                     )})                               

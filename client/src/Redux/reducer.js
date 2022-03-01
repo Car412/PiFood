@@ -11,8 +11,8 @@ import {
 } from '../Redux/actions'
 
 const initialState = {     
-    recipes : [],
     allRecipes: [],
+    recipes : [],    
     detail : [],
     types: []  
 };

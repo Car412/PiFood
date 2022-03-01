@@ -6,8 +6,8 @@ const { Recipe, Types} = require ('../db.js');
 const recipes = Router();
 
 const getApi = async () =>{
-    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?number=100&addRecipeInformation=true&apiKey=779c40afcc9245d9bd2c528617b97a2f`)
-    console.log(apiUrl)
+    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?number=100&addRecipeInformation=true&apiKey=68d70ac8e6b54194bf0da48d9853c83a`)
+    //console.log(apiUrl)
     const apiInfo = await apiUrl.data.results.map(el =>{
         return{
             ID: el.id,                         
@@ -47,12 +47,12 @@ recipes.get('/', async (req, res)=>{
     const recipesTotal = await getAllrecipes()
   
     if (name) {
-        let recipeName = recipesTotal.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))// se fija si incluye el nombre que viene por query
+        let recipeName = recipesTotal.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))
         recipeName.length ?
             res.status(200).send(recipeName) :
             res.status(404).send("Recipe doesn't exist")
     } else {
-        res.status(200).send(recipesTotal) // si no hay query, manda todo 
+        res.status(200).send(recipesTotal) 
     }
 })
 
@@ -60,8 +60,8 @@ recipes.get('/:id', async (req, res)=>{
     const {id} = req.params;
     const recipesTotal = await getAllrecipes();
 
-    if(id){
-        const recipeId = recipesTotal.filter(el=> el.ID?.toString() === id)
+    if(id){        
+        const recipeId = recipesTotal.filter(el=>el.ID == id)
         recipeId.length?
         res.status(200).send(recipeId) :
         res.status(404).send('Recipe not found') 
