@@ -10,6 +10,7 @@
     "axios": "^0.26.0",
     "dotenv": "^16.0.0",
     "enzyme": "^3.11.0",
+    "nodemon": "^2.0.15",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.6",
