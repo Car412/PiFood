@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.2.2",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
     "axios": "^0.26.0",
+    "dotenv": "^16.0.0",
     "enzyme": "^3.11.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
