@@ -6,7 +6,7 @@ const { Recipe, Types} = require ('../db.js');
 const recipes = Router();
 
 const getApi = async () =>{
-    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?number=100&addRecipeInformation=true&apiKey=68d70ac8e6b54194bf0da48d9853c83a`)
+    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?number=100&addRecipeInformation=true&apiKey=77b5b8b644c9434c9903f5671d8d5881`)
     //console.log(apiUrl)
     const apiInfo = await apiUrl.data.results.map(el =>{
         return{

@@ -6,7 +6,7 @@ export default function Card({img, name, diets}){
         <div className={estilos.contenedor}>
             <h2 className={estilos.titulo}>{name}</h2>
             {diets?.map(e=> <h4 className={estilos.h4} key={e.name}>{e.name}</h4>)}
-            <img className={estilos.img}src= {img} alt='img not found'></img>                        
+            <img className={estilos.img}src= {img} alt='img'></img>                        
             
         </div>
     );
