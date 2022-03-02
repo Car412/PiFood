@@ -12,12 +12,12 @@ export default function Home(){
     const dispatch = useDispatch();
     const allRecipes = useSelector((state)=> state.recipes)
     const [currentPage, setCurrentPage] = useState(1)
-    const [recipesPerPage, setRecipesPerPage]= useState(9)
+    const [recipesPerPage, setRecipesPerPage]= useState(9) //eslint-disable-line
     const indexOfLastRecipe = currentPage * recipesPerPage 
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage
     const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
-    const [orden, setOrden] = useState('')
-    const [orden1, setOrden1] = useState('')
+    const [orden, setOrden] = useState('') //eslint-disable-line
+    const [orden1, setOrden1] = useState('') //eslint-disable-line
 
     const paginado = (pageNumber) =>{ // esta ctte me va a ayudar al renderizado
         setCurrentPage(pageNumber)//setea la pag en el numero que yo vaya apretando
@@ -38,7 +38,7 @@ export default function Home(){
         e.preventDefault();
         dispatch(orderByName(e.target.value))
         setCurrentPage(1); // empieza a ordenar desde la primera pág
-        setOrden(`ordenado ${e.target.value}`) // modifica el estado local y se renderiza
+        setOrden(`ordenado ${e.target.value}`)
     }
 
     function handleScore(e){

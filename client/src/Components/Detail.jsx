@@ -15,8 +15,7 @@ export default function Detail(){
     },[]) //eslint-disable-line
 
     const myRecipe= useSelector((state)=>state.detail)
-    console.log(myRecipe)
-    
+        
     return(
         <div className={estilos.contenedor}>    
         <div>{Object.keys(myRecipe).length > 0 ?

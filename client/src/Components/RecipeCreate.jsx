@@ -22,7 +22,7 @@ export default function RecipeCreate(){
     
     useEffect(()=>{
         dispatch(getTypes());
-    }, []);
+    }, []); //eslint-disable-line
 
     const diets = useSelector((state)=> state.types)
 
